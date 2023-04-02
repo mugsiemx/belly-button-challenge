@@ -53,12 +53,16 @@ let demographicsView = d3.select("#sample-metadata");
         // console.log(xAxisData);
 
             // x axis data to select top 10 (data default is sort desc)
-    let xbarAxisData = sample_values.slice(0,10);
+    let xbarAxisData = sample_values.reverse().slice(0,10);
         // console.log(yAxisData);
 
             // hovertext data to select top 10 (data default is sort desc)
-    let hoverText = otu_labels.slice(0,10);
+    let hoverText = otu_labels.reverse().slice(0,10);
         // console.log(hoverText);
+            // bar chart x axis
+    let xbarMin = Math.min(xbarAxisData)
+    let xbarMax = Math.max(xbarAxisData)
+    console.log(xbarMin, xbarMax)
 
     // create filtered data for individual's demographics for the selected Navel Id
     let filteredMetadata = metadata.filter(bacteriaData => bacteriaData.id == navelId)[0];
@@ -68,29 +72,33 @@ let demographicsView = d3.select("#sample-metadata");
 
 // 2. create horizontal bar chart to display the top 10 OTUs for individual's navels
     // trace for the navel data
-    // console.log(ybarAxisData);
+    console.log(ybarAxisData);
     console.log(xbarAxisData);
-    let traceBar = [{
-        x: {xbarAxisData},
-        y: {ybarAxisData},
+    let traceBar = {
+        x: xbarAxisData,
+        y: ybarAxisData,
         text: hoverText,
+        marker: {
+            color: "teal",
+            width: 1
+        },
         type: "bar",
         orientation: "h"
-    }];
+    };
     
     // Create data array
     let barData = [traceBar];
 
     // Apply a title to the layout
     let barLayout = {
-        title: plotTitle,
+        title: plotTitle,    
         // Include margins in the layout so the x-tick labels display correctly
         margin: {
-        l: 50,
-        r: 50,
-        b: 200,
-        t: 50,
-        pad: 4
+            l: 150,
+            r: 0,
+            b: 75,
+            t: 50,
+            pad: 0,
         }
     };
     
@@ -99,27 +107,29 @@ let demographicsView = d3.select("#sample-metadata");
 
 // 3. create bubble chart that displays each sample
     // trace for the navel data
-    let traceBubble = [{
+    console.log(otu_ids)
+    console.log(sample_values)
+    let traceBubble = {
         x: otu_ids,
         y: sample_values,
         text: otu_labels,
         mode: 'markers',
         type: "bubble",
         marker:{
-            size: [sample_values],
+            size: sample_values,
             color: otu_ids,
             colorscale: 'Hot'
         }        
-    }];
+    };
     
     // Create data array
     let bubbleData = [traceBubble];
 
-    var bubbleLayout = {
+    let bubbleLayout = {
         title: plotTitle,
         showlegend: false,
         height: 600,
-        width: 600
+        width: 1300
       };
 
     // Render the plot to the div tag with id "plot"
