@@ -8,7 +8,7 @@ const navelId = 1601;
 
 
 
-// convert JSON file to an array of objects
+// 1. convert JSON file to an array of objects
 let data = d3.json(url).then(function(data) {
     // console.log(data);
 
@@ -20,21 +20,41 @@ let data = d3.json(url).then(function(data) {
     let metadata = data.metadata;
        // console.log(metadata);
 
+    // define all required variables:
+    // create filtered data for individual's navel data
+    let filteredSample = samples.filter(bacteriaData => bacteriaData.id == navelId)[0];
+        // console.log(filteredSample);
 
-    // create filtered data (sort/slice) for individual navel data
-    let filteredSample = samples.filter(bacteria => bacteria.id == navelId).reverse();
-    let slicedSample = filteredSample.slice(0,10);
-        console.log(slicedSample)
-    // let filteredMeta = metadata.filter(bacteriaData => bacteriaData.id == navelId)
+        // then sample_values for the bar chart
+    let sample_values = filteredSample.sample_values;
+        // console.log(sample_values);
 
+        // then title for plots
+    let plotTitle = 'Top 10 Individual Navel Bacterial for Navel Id: 1601'
 
-    // create variables for bar chart
+        // then otu_ids as labels for the bar chart
+    let otu_ids = filteredSample.otu_ids;
+        // console.log(otu_ids);
 
-    let sampleIds = samples.id;
-        // console.log(sampleIds)
-    let otuIds = samples.otu_ids;
-    let otuLabels = samples.otu_labels;
-    let sampleValues = samples.sample_values;
+        // then otu_labels as the hovertext for the chart
+    let otu_labels = filteredSample.otu_labels;
+        // console.log(otu_labels);
+
+            // x axis data to select top 10 (data default is sort desc)
+    let xAxisData = sample_values.slice(0,10);
+        // console.log(xAxisData);
+
+            // y axis data to select top 10 (data default is sort desc)
+    let yAxisData = otu_ids.slice(0,10).map(otu_id => `OTU ${otu_id}`).reverse();
+        // console.log(yAxisData);
+
+            // hovertext data to select top 10 (data default is sort desc)
+    let hoverText = otu_labels.slice(0,10);
+        // console.log(hoverText);
+
+    // create filtered data for individual's demographics    
+    let filteredMetadata = metadata.filter(bacteriaData => bacteriaData.id == navelId)[0];
+        // console.log(filteredMetadata);
 
 
 
@@ -55,37 +75,41 @@ let data = d3.json(url).then(function(data) {
 
 
 
+
+
+
+// 2. create horizontal bar chart to display the top 10 OTUs for individualS
+
+        // trace for the navel data
+        let trace = [{
+            x: xAxisData,
+            y: yAxisData,
+            text: hoverText,
+            type: "bar",
+            orientation: "h"
+        }];
+        
+        // Create data array
+        let barData = [trace];
+        
+        // Apply a title to the layout
+        let barLayout = {
+            title: plotTitle,
+            // Include margins in the layout so the x-tick labels display correctly
+            margin: {
+            l: 50,
+            r: 50,
+            b: 200,
+            t: 50,
+            pad: 4
+            }
+        };
+        
+        // Render the plot to the div tag with id "plot"
+        Plotly.newPlot("bar", barData, barLayout);
+
+// 3. create bubble chart that displays each sample
+// 4. display the sample metadata, i.e., an individual's demographic info
+// 5. Display each key-value pair from the metadata JSON object somewhere on the page.
 });
-
-
-// // create horizontal bar chart to display the top 10 OTUs for individualS
-// let xdata = otuIds;
-
-// // trace for the subject data
-// let trace = {
-//     x: names,
-//     y: romanSearchResults,
-//     text: romanNames,
-//     name: "Subject ID",
-//     type: "bar"
-//   };
-  
-//   // Create data array
-//   let barData = [trace];
-  
-//   // Apply a title to the layout
-//   let layout = {
-//     title: "Test Navel Id: + $(navelId)",
-//     barmode: "group",
-//     // Include margins in the layout so the x-tick labels display correctly
-//     margin: {
-//       l: 50,
-//       r: 50,
-//       b: 200,
-//       t: 50,
-//       pad: 4
-//     }
-//   };
-  
-//   // Render the plot to the div tag with id "plot"
-//   Plotly.newPlot("plot", data, layout);
+// 6. update all the plots when a new sample is selected
