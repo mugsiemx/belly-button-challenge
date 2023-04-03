@@ -4,16 +4,16 @@ const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/
 // let selDataset = document.getElementById("selDataset");
 // selDataset.addEventListener("optionChanged", selDataset)
 
-const navelId = 1601;
-
+// const navelId = 1601;
 
 // 1. convert JSON file to an array of objects
 let data = d3.json(url).then(function(data) {
     // console.log(data);
 
-// create D3 html "variables"
+
+
 // to select Navel Id from drop down list
-let navelDropDown = d3.select("#selDataset");
+// let navelId = d3.select("#selDataset");
 // to select Navel Id from drop down list
 let demographicsView = d3.select("#sample-metadata");
 
@@ -25,7 +25,13 @@ let demographicsView = d3.select("#sample-metadata");
     let metadata = data.metadata;
         console.log(metadata);
 
+    // begin with a random test subject so the Dashboard displays data
+    let randomId = names[Math.floor(Math.random()*names.length)];
+    console.log(randomId);
+    let navelId = parseInt(randomId)
+    // dashboard()
 
+// function dashboard();
     // define all required variables:
     // create filtered data for individual's navel data
     let filteredSample = samples.filter(bacteriaData => bacteriaData.id == navelId)[0];
@@ -36,7 +42,7 @@ let demographicsView = d3.select("#sample-metadata");
         // console.log(sample_values);
 
         // then title for plots
-    let plotTitle = 'Top 10 Bacteria for Navel Id: 1601'
+    let plotTitle = 'Top 10 Bacteria for Navel Id:' += navelId; 
 
         // then otu_ids as labels for the bar chart
     let otu_ids = filteredSample.otu_ids;
@@ -46,41 +52,37 @@ let demographicsView = d3.select("#sample-metadata");
     let otu_labels = filteredSample.otu_labels;
         // console.log(otu_labels);
 
-            // y axis data to select top 10 (data default is sort desc)
+        // y axis data to select top 10 (data default is sort desc)
     let ybarAxisData = otu_ids.slice(0,10).map(otu_id => `OTU ${otu_id}`).reverse();
-        // console.log(xAxisData);
+        // console.log(ybarAxisData);
 
             // x axis data to select top 10 (data default is sort desc)
     let xbarAxisData = sample_values.reverse().slice(0,10);
-        // console.log(yAxisData);
+        // console.log(xbarAxisData);
 
             // hovertext data to select top 10 (data default is sort desc)
     let hoverText = otu_labels.reverse().slice(0,10);
         // console.log(hoverText);
 
-
     // create filtered data for individual's demographics for the selected Navel Id
     let filteredMetadata = metadata.filter(bacteriaData => bacteriaData.id == navelId)[0];
         // console.log(filteredMetadata);
-    let washy = filteredMetadata.wfreq 
+    let washy = parseInt(filteredMetadata.wfreq);
         // console.log(washy)
 
 // 2. create horizontal bar chart to display the top 10 OTUs for individual's navels
     // trace for the navel data
-    console.log(ybarAxisData);
-    console.log(xbarAxisData);
     let traceBar = {
         x: xbarAxisData,
         y: ybarAxisData,
         text: hoverText,
         marker: {
-            color: "teal",
+            color: "MediumAquaMarine",
             width: 1
         },
         type: "bar",
         orientation: "h"
-    };
-    
+    };    
     // Create data array
     let barData = [traceBar];
 
@@ -95,15 +97,14 @@ let demographicsView = d3.select("#sample-metadata");
             t: 50,
             pad: 0,
         }
-    };
-    
+    };    
     // Render the plot to the div tag with id "plot"
     Plotly.newPlot("bar", barData, barLayout);
 
 // 3. create bubble chart that displays each sample
     // trace for the navel data
-    console.log(otu_ids)
-    console.log(sample_values)
+    // console.log(otu_ids)
+    // console.log(sample_values)
     let traceBubble = {
         x: otu_ids,
         y: sample_values,
@@ -143,25 +144,51 @@ let demographicsView = d3.select("#sample-metadata");
    // console.log(key, value);
         demographicsView.append("p").text(`${key}: ${value}`);
   });
-});
 
-    // advanced challenge assignment
+
+// advanced challenge assignment
     let gaugeData = [
         {
             domain: { x: [0, 1], y: [0, 1] },
-            value: 2,
+            value: washy,
             title: { text: "Scrubs per Week" },
+            subtitle:{text: "Belly Button Washing Frequency"},
             type: "indicator",
             mode: "gauge+number"
         },
-    ];
-              
-    let gaugeLayout = { width: 600, height: 600 };
-    
+    ];              
+    let gaugeLayout = { width: 600, height: 600 };    
     Plotly.newPlot('gauge', gaugeData, gaugeLayout);
 
 // 6. update all the plots when a new sample is selected
-    // function updatePlotly(newId) {
-    //     Plotly.restyle("bar", "values", [newdata]);
-        // Plotly.restyle("bubble", "values", [newdata]);
-    // 
+// // Call updatePlotly() when a change takes place to the DOM
+// d3.selectAll("#selDataset").on("change", updatePlotly);
+
+// This function is called when a dropdown menu item is selected
+// function updatePlotly() {
+//   // Use D3 to select the dropdown menu
+//   let dropdownMenu = d3.select("#selDataset");
+//   // Assign the value of the dropdown menu option to a variable
+//   let dataset = dropdownMenu.property("value");
+
+
+
+//   // Initialize x and y arrays
+//   let x = [];
+//   let y = [];
+
+
+//   // Note the extra brackets around 'x' and 'y'
+//   Plotly.restyle("bar", "x", [x]);
+//   Plotly.restyle("bubble", "y", [y]);
+//   Plotly.restyle("gauge", "y", [y]);
+// }
+
+// init();
+
+
+// function updatePlotly(newId) {
+//     Plotly.restyle("bar", "values", [newdata]);
+//     Plotly.restyle("bubble", "values", [newdata]);
+});
+// init();
