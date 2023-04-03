@@ -7,7 +7,6 @@ const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/
 const navelId = 1601;
 
 
-
 // 1. convert JSON file to an array of objects
 let data = d3.json(url).then(function(data) {
     // console.log(data);
@@ -24,8 +23,7 @@ let demographicsView = d3.select("#sample-metadata");
     let samples = data.samples;
         //console.log(samples);
     let metadata = data.metadata;
-       // console.log(metadata);
-
+        console.log(metadata);
 
 
     // define all required variables:
@@ -59,16 +57,13 @@ let demographicsView = d3.select("#sample-metadata");
             // hovertext data to select top 10 (data default is sort desc)
     let hoverText = otu_labels.reverse().slice(0,10);
         // console.log(hoverText);
-            // bar chart x axis
-    let xbarMin = Math.min(xbarAxisData)
-    let xbarMax = Math.max(xbarAxisData)
-    console.log(xbarMin, xbarMax)
+
 
     // create filtered data for individual's demographics for the selected Navel Id
     let filteredMetadata = metadata.filter(bacteriaData => bacteriaData.id == navelId)[0];
         // console.log(filteredMetadata);
-
-  
+    let washy = filteredMetadata.wfreq 
+        // console.log(washy)
 
 // 2. create horizontal bar chart to display the top 10 OTUs for individual's navels
     // trace for the navel data
@@ -128,6 +123,12 @@ let demographicsView = d3.select("#sample-metadata");
     let bubbleLayout = {
         title: plotTitle,
         showlegend: false,
+        xaxis:{
+            title:{
+                text: 'OTU ID',
+            },
+        },
+        automargin: true,
         height: 600,
         width: 1300
       };
@@ -143,8 +144,24 @@ let demographicsView = d3.select("#sample-metadata");
         demographicsView.append("p").text(`${key}: ${value}`);
   });
 });
+
+    // advanced challenge assignment
+    let gaugeData = [
+        {
+            domain: { x: [0, 1], y: [0, 1] },
+            value: 2,
+            title: { text: "Scrubs per Week" },
+            type: "indicator",
+            mode: "gauge+number"
+        },
+    ];
+              
+    let gaugeLayout = { width: 600, height: 600 };
+    
+    Plotly.newPlot('gauge', gaugeData, gaugeLayout);
+
 // 6. update all the plots when a new sample is selected
     // function updatePlotly(newId) {
     //     Plotly.restyle("bar", "values", [newdata]);
         // Plotly.restyle("bubble", "values", [newdata]);
-    // }
+    // 
