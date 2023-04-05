@@ -35,16 +35,25 @@ let demographicsView = d3.select("#sample-metadata");
         //console.log(samples);
     let metadata = data.metadata;
         console.log(metadata);
-        
-// let dropdownMenu = d3.select("#selDataset");
-// let selDataset = dropdownMenu.property("value";)
-// let selDataset = dropdownMenu.getElementById("selDataset");
     
-    
-    // for (i = 0; i < names.length; i++) {
-    //     dropdownMenu = names[i];
-    // }
+    // selDataset.addEventListener("optionChanged", selDataset)
+    // if "optionChanged" = true
+    // set up the drop down list for selection
+     let selDataset = Object.values(names)
+     let option = ""
+     for (let i = 0; i < selDataset.length; i++)
+     {
+     option += '<option value="'+ selDataset[i] +'">' + selDataset[i] + "</option>"
+     }
+    document.getElementById('selDataset').innerHTML = option;
 
+// let dropdownMenu = d3.select("#selDataSet");
+//     names.forEach(function(name) {
+//         dropdownMenu.append("option").text(name);
+//     }
+//)
+
+// let dropdownMenu = document.getElementById("selDataSet")
 
     // begin with a random test subject so the Dashboard displays data
     // let randomId = names[Math.floor(Math.random()*names.length)];

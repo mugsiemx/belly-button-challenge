@@ -38,4 +38,8 @@ Hulcr, J. et al. (2012) A Jungle in There: Bacteria in Belly Buttons are Highly 
 References and Interesting Code, Thoughts and Credits
 - Chris Coyier /https://css-tricks.com/author/chriscoyier/ for randomId code
 - Plotly Graphing Libraries (mostly: https://plotly.com/python/tick-formatting/)
+- https://www.youtube.com/@WebDevSimplified for the drop down menu
+- for the challenges of coding, admiring our differing approaches, and just plain moral support
+    my colleagues: Rhi Sehl, Molly Gac, and Julie Eremeeva
+    my instructors: Wil Zigler, Yasmine Aitouny, and Michelle DeMars
 
