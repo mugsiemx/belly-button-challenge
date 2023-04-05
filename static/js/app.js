@@ -12,6 +12,17 @@ let data = d3.json(url).then(function(data) {
 
 
 
+
+
+    // Object.entries(data.names).forEach(entry => {
+    //     console.log(data.names)
+    //     let [value] = entry;
+    //     console.log(value)
+    // // console.log(key, value);
+    //     dropdownMenu.append("p").text(`${value}`);
+    // });
+
+
 // to select Navel Id from drop down list
 // let navelId = d3.select("#selDataset");
 // to select Navel Id from drop down list
@@ -24,11 +35,22 @@ let demographicsView = d3.select("#sample-metadata");
         //console.log(samples);
     let metadata = data.metadata;
         console.log(metadata);
+        
+// let dropdownMenu = d3.select("#selDataset");
+// let selDataset = dropdownMenu.property("value";)
+// let selDataset = dropdownMenu.getElementById("selDataset");
+    
+    
+    // for (i = 0; i < names.length; i++) {
+    //     dropdownMenu = names[i];
+    // }
+
 
     // begin with a random test subject so the Dashboard displays data
-    let randomId = names[Math.floor(Math.random()*names.length)];
-    console.log(randomId);
-    let navelId = parseInt(randomId)
+    // let randomId = names[Math.floor(Math.random()*names.length)];
+    // console.log(randomId);
+    // let navelId = parseInt(randomId)
+    const navelId = 1601;
     // dashboard()
 
 // function dashboard();
@@ -42,7 +64,7 @@ let demographicsView = d3.select("#sample-metadata");
         // console.log(sample_values);
 
         // then title for plots
-    let plotTitle = 'Top 10 Bacteria for Navel Id:' += navelId; 
+    let plotTitle = ('Top 10 Bacteria for Navel Id:' + navelId); 
 
         // then otu_ids as labels for the bar chart
     let otu_ids = filteredSample.otu_ids;
