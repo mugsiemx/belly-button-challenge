@@ -1,19 +1,16 @@
 // Get the api endpoint
 const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
 
+const dropdown = document.getElementById('selDataset')[0];
+console.log(selDataset);
+
 // let selDataset = document.getElementById("selDataset");
 // selDataset.addEventListener("optionChanged", selDataset)
 
-// const navelId = 1601;
 
 // 1. convert JSON file to an array of objects
 let data = d3.json(url).then(function(data) {
     // console.log(data);
-
-
-
-
-
     // Object.entries(data.names).forEach(entry => {
     //     console.log(data.names)
     //     let [value] = entry;
@@ -36,16 +33,44 @@ let demographicsView = d3.select("#sample-metadata");
     let metadata = data.metadata;
         console.log(metadata);
     
-    // selDataset.addEventListener("optionChanged", selDataset)
-    // if "optionChanged" = true
+    // function newID();
+    //     var navelId = 1601;
+//     function newId();
+//     navelId = selDataset;
+//     return navelId;
+
+// } else {
+//     // begin with a random test subject so the Dashboard displays data
+//     let randomId = names[Math.floor(Math.random()*names.length)];
+//     navelId = parseInt(randomId);
+//     return navelId       
+// };
+    
+// begin with a random test subject so the Dashboard displays data
+    // let randomId = names[Math.floor(Math.random()*names.length)];
+    // console.log(randomId);
+    // navelId = parseInt(randomId);
+    // console.log(navelId)
+
     // set up the drop down list for selection
      let selDataset = Object.values(names)
      let option = ""
+     // allow for a random selection
+     option += "<option value=>" + "select" + "</option>";
+     // then add the belly button Ids to the drop down menu
      for (let i = 0; i < selDataset.length; i++)
      {
      option += '<option value="'+ selDataset[i] +'">' + selDataset[i] + "</option>"
      }
-    document.getElementById('selDataset').innerHTML = option;
+
+    document.getElementById('selDataset').innerHTML = option
+    console.log(option)
+    console.log(selDataset)
+    
+    // selDataset.addEventListener("optionChanged", selDataset)
+    //  navSlId = document.getElementById("selDataset").value
+        
+
 
 // let dropdownMenu = d3.select("#selDataSet");
 //     names.forEach(function(name) {
@@ -56,10 +81,10 @@ let demographicsView = d3.select("#sample-metadata");
 // let dropdownMenu = document.getElementById("selDataSet")
 
     // begin with a random test subject so the Dashboard displays data
-    // let randomId = names[Math.floor(Math.random()*names.length)];
-    // console.log(randomId);
-    // let navelId = parseInt(randomId)
-    const navelId = 1601;
+    let randomId = names[Math.floor(Math.random()*names.length)];
+    console.log(randomId);
+    let navelId = parseInt(randomId)
+    // const navelId = 1601;
     // dashboard()
 
 // function dashboard();
@@ -202,6 +227,7 @@ let demographicsView = d3.select("#sample-metadata");
 //   // Assign the value of the dropdown menu option to a variable
 //   let dataset = dropdownMenu.property("value");
 
+// document.addEventListener("optionChanged", newId)
 
 
 //   // Initialize x and y arrays
@@ -216,10 +242,35 @@ let demographicsView = d3.select("#sample-metadata");
 // }
 
 // init();
+});
 
+// const getId = () => {
+//     const select = document.querySelector("h5")
+//     alert("do something");
+//     // if(selDataset == "random") {
+//     // // begin with a random test subject so the Dashboard displays data
+//     //     let randomId = names[Math.floor(Math.random()*names.length)];
+//     //     navelId = parseInt(randomId);
+//     //     return navelId;  
+//     // } else {
+//     //     navelId = selDataset[0];
+//     //     return navelId;
+//     // };
+// };
+// // function optionChanged(){
+//     var selDataset = document.getElementById("selDataset");
+//     var result = document.getElementById("h5");
+le
+    selDataset.addEventListener("optionChanged", () => {
+        result.innerText = selDataset.option[selDataset.selectedIndex].value;
+        console.log(selDataset.selectedIndex)
+    });
+    
+    //https://www.youtube.com/watch?v=TF3QGo2_AvY
 
 // function updatePlotly(newId) {
 //     Plotly.restyle("bar", "values", [newdata]);
 //     Plotly.restyle("bubble", "values", [newdata]);
-});
-// init();
+
+
+// getId();
