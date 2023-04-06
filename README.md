@@ -28,6 +28,7 @@ Instructions for coding:
 4. Display the sample metadata, i.e. in individual's demographic information
 5. Display each key-value pair from the metadata JSON object on the web page anywhere
 6. Update all the polots when a new sample is selectioned
+6a. Added a Number of Washings per Week gauge from the additional challenge notes (not to specs, aesthetics only)
 7. Deploy your app to a free static page, hosting service, such as GitHub Pages
     --submit the links to my deployment and GitHub repository.
     -- ensured the repository will have regular commits and a thorought README.md.file
@@ -40,7 +41,10 @@ References and Interesting Code, Thoughts and Credits
 - Chris Coyier /https://css-tricks.com/author/chriscoyier/ for randomId code
 - Plotly Graphing Libraries (mostly: https://plotly.com/python/tick-formatting/)
 - https://www.youtube.com/@WebDevSimplified for the drop down menu
+- https://www.w3schools.com/ for many coding options and details
+- https://stackoverflow.com/ for many coding options, details, and explanations as to why
 - for the challenges of coding, admiring our differing approaches, and just plain moral support
     my colleagues: Rhi Sehl, Molly Gac, and Julie Eremeeva
     my instructors: Wil Zigler, Yasmine Aitouny, and Michelle DeMars
-
+    my graders: for being patient with grading my coding projects
+    the BSC Learning Team, YES!! YOU ALL ROCK!!
