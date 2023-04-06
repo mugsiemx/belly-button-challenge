@@ -3,9 +3,9 @@
 Interactive dashboard to explore the Belly Button Biodiversity dataset
 
 Background
-In this assignment, interactive dashboard is built to explore the Belly Button Biodiversity datasetLinks to an external site, which catalogs the microbes that colonize human navels.
+In this assignment, interactive dashboard is built to explore the Belly Button Biodiversity datasetLinks to an external site, which catalogs the microbes that colonize human navels.  The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
 
-The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
+![Image of Bacteria](https://github.com/mugsiemx/belly-button-challenge/blob/main/Images/bacteria.jpg)
 
 Instructions to begin:
 -Create a new repository for this project called belly-button-challenge. Do not add this Challenge to an existing repository.
@@ -27,8 +27,11 @@ Instructions for coding:
     --Use otu_labels for the text values.
 4. Display the sample metadata, i.e. in individual's demographic information
 5. Display each key-value pair from the metadata JSON object on the web page anywhere
-6. Update all the polots when a new sample is selectioned
+6. Update all the plots when a new sample is selectioned
 6a. Added a Number of Washings per Week gauge from the additional challenge notes (not to specs, aesthetics only)
+
+    ![Image of Web Page](https://github.com/mugsiemx/belly-button-challenge/blob/main/Images/dashboard.png)
+
 7. Deploy your app to a free static page, hosting service, such as GitHub Pages
     --submit the links to my deployment and GitHub repository.
     -- ensured the repository will have regular commits and a thorought README.md.file
