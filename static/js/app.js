@@ -1,7 +1,7 @@
 
     // Get the api endpoint
     const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json";
-    // var navelId = 0
+    var navelId
 
 // function createVisuals(navelId) {
 
@@ -32,20 +32,7 @@
 //             names.orEach(function(name) {
 //             dropdownMenu.append("option").text(name);
 
-//     // set up the drop down list for selection
-//         let dropdownMenu = Object.values(data.names)
-//         let option = ""
-//         // allow for a random selection
-//         option += "<option value=>" + "select" + "</option>";
-//         // then add the belly button Ids to the drop down menu
-//         for (let i = 0; i < selDataset.length; i++)
-//         {
-//         option += '<option value="'+ selDataset[i] +'">' + selDataset[i] + "</option>"
-//         }
-//         document.getElementById('selDataset').innerHTML = option
-//         console.log(option)
-//         console.log(selDataset)
-//     // let navelId = d3.select("#selDataset");
+
 //     // to select Navel Id from drop down list
 
 //     // } else {
@@ -94,7 +81,7 @@ function createVisuals(navelId) {
     // define all required variables:
     // create filtered data for individual's navel data
     let filteredSample = samples.filter(bacteriaData => bacteriaData.id == navelId)[0];
-        // console.log(filteredSample);
+        console.log(filteredSample);
 
     // then sample_values for the bar chart
     let sample_values = filteredSample.sample_values;
@@ -199,13 +186,21 @@ function createVisuals(navelId) {
         height: 600,
         width: 1300
     };
-
     // Render the plot to the div tag with id "plot"
     Plotly.newPlot("bubble", bubbleData, bubbleLayout);
 
     // 4. display the sample metadata, i.e., an individual's demographic info    
     let demographicsView = d3.select("#sample-metadata");
-
+    // 5. Display each key-value pair from the metadata JSON object somewhere on the page.
+// create filtered data for individual's demographics for the selected Navel Id
+       // let dropdownMenu = d3.select("#selDataset");
+    // Assign the value of the dropdown menu option to a variable
+    // let dataset = dropdownMenu.property("value");
+    Object.entries(filteredMetadata).forEach(entry => {
+        let [key, value] = entry;
+    // console.log(key, value);
+        demographicsView.append("p").text(`${key}: ${value}`).property("value", navelId);
+    });
 
     // advanced challenge assignment
         let gaugeData = [
@@ -222,51 +217,49 @@ function createVisuals(navelId) {
         ];              
         let gaugeLayout = { width: 600, height: 600 };    
         Plotly.newPlot('gauge', gaugeData, gaugeLayout);
-});
+})};
 
-// 5. Display each key-value pair from the metadata JSON object somewhere on the page.
-function demographicsView(navelId) {
-    var demographicsView = d3.select("#sample-metadata");
-// create filtered data for individual's demographics for the selected Navel Id
-    let filteredMetadata = metadata.filter(bacteriaData => bacteriaData.id == navelId)[0];
-    // let dropdownMenu = d3.select("#selDataset");
-    // Assign the value of the dropdown menu option to a variable
-    // let dataset = dropdownMenu.property("value");
-    Object.entries(filteredMetadata).forEach(entry => {
-        let [key, value] = entry;
-    // console.log(key, value);
-        demographicsView.append("p").text(`${key}: ${value}`).property("value", navelId);
-    })};
+
 
 // 6. update all the plots when a new sample is selected
 function optionChanged(navelId) {
     console.log(navelId);
-    demographicsView(navelId);
     createVisuals(navelId);
     };
-};
 
 // Then learn something fun
 function dashBoard(){
-
+    // var navelId
     // to select Navel Id from drop down list
-    let dropdownMenu = d3.select("#selDataSet");
+    // let dropdownMenu = d3.select("#selDataSet");
     // Use D3 to make the dropdown menu
     d3.json(url).then(function(data) {
     // create variables for individual navel data
-        let navelIds = data.names;
+        // let navelIds = data.names;
     // fill the dropdown menu rows        
-        navelIds.forEach(function(navelId) {
-            dropdownMenu.append("option").text(navelId).property("value", navelId); 
-    });    
+        // navelIds.forEach(function(navelId) {
+        //     dropdownMenu.append("option").text(navelId).property("value", navelId); 
+        
     // begin with a random test subject so the Dashboard displays data
     // let randomId = navelIds[Math.floor(Math.random()*navelIds.length)];
     // // console.log(randomId);
     // navelId = parseInt(randomId);
         // console.log(navelId)
-
+        // set up the drop down list for selection
+        let selDataset = Object.values(data.names)
+        let option = ""
+        // allow for a random selection
+        option += "<option value=>" + "select" + "</option>";
+        // then add the belly button Ids to the drop down menu
+        for (let i = 0; i < selDataset.length; i++)
+        {
+        option += '<option value="'+ selDataset[i] +'">' + selDataset[i] + "</option>"
+        }
+        document.getElementById('selDataset').innerHTML = option
+        console.log(option)
+        console.log(selDataset)
+    // let navelId = d3.select("#selDataset");
     // show a data for a randomly selected navel Id
-    demographicsView(navelId);
     createVisuals(navelId);
 })};
 
@@ -274,7 +267,7 @@ function dashBoard(){
 dashBoard()
 
 //     // // Call updatePlotly() when a change takes place to the DOM
-//     // d3.selectAll("#selDataset").on("change", updatePlotly);
+    d3.selectAll("#selDataset").on("change", createVisuals);
 
 // This function is called when a dropdown menu item is selected
 // function demoGraphics(navelId) {
@@ -332,4 +325,4 @@ dashBoard()
 //     console.log(navelId + "line 288")
 // });
 
-// dashBoard();
+dashBoard();
