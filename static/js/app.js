@@ -124,6 +124,13 @@ let demographicsView = d3.select("#sample-metadata");
     let filteredMetadata = metadata.filter(bacteriaData => bacteriaData.id == navelId)[0];
         // console.log(filteredMetadata);
     let washy = parseInt(filteredMetadata.wfreq);
+
+
+    // var washy = 0
+    // if (filteredMetadata.wfreq != "null") {
+    //     washy = parseInt(filteredMetadata.wfreq);
+    //     }   
+    // });
         // console.log(washy)
 
 // 2. create horizontal bar chart to display the top 10 OTUs for individual's navels
@@ -260,7 +267,6 @@ let demographicsView = d3.select("#sample-metadata");
 // // function optionChanged(){
 //     var selDataset = document.getElementById("selDataset");
 //     var result = document.getElementById("h5");
-le
     selDataset.addEventListener("optionChanged", () => {
         result.innerText = selDataset.option[selDataset.selectedIndex].value;
         console.log(selDataset.selectedIndex)
