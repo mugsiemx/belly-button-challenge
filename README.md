@@ -30,7 +30,7 @@ Instructions for coding:
 6. Update all the plots when a new sample is selectioned
 6a. Added a Number of Washings per Week gauge from the additional challenge notes (not to specs, aesthetics only)
 
-    ![Image of Web Page](https://github.com/mugsiemx/belly-button-challenge/blob/main/Images/dashboard.png)
+   ![Image of Web Page](https://github.com/mugsiemx/belly-button-challenge/blob/main/Images/dashboard.png)
 
 7. Deploy your app to a free static page, hosting service, such as GitHub Pages
     --submit the links to my deployment and GitHub repository.
