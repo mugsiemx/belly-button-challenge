@@ -15,7 +15,7 @@ Instructions to begin:
 -Push the above changes to GitHub.
 -Deploy the new repository to GitHub Pages.
 Instructions for coding:
-1. Use the D3 library to read in samples.json from the URL https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json.
+1. This program works in two ways, the code to: Use the D3 library to read in samples.json from the URL https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/v1.1/14-Interactive-Web-Visualizations/02-Homework/samples.json has been commented out and the local file, /data/samples.json, is used as the deployment to GitHub Pages failed with the call directly to the URL. This program will run as long as only one method is chosen and saved.
 2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
     --Use sample_values as the values for the bar chart.
     --Use otu_ids as the labels for the bar chart.
